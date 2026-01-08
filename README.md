@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="screenshot.png" alt="Pocket SRE screenshot" width="900">
+  <img src="screenshot.jpg" alt="Pocket SRE screenshot" width="900">
 </p>
 
 # Pocket SRE (AI Incident Helper)
