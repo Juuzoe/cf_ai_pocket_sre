@@ -128,8 +128,9 @@ Refresh the page and ask what it saved.
 
 ## PROMPTS.md
 
-AI-assisted coding was used during development. The prompts used to build and iterate on the project are recorded in `PROMPTS.md` as required by the internship assignment.
+AI-assisted coding was used during development. The prompts used to build and iterate on the project are recorded in `PROMPTS.md` 
 
-## Notes
+LLMs used: ChatGPT 5.2 Thinking, Cursor Composer 1 + ChatGPT 5.2 for a few first prompts, Llama 3
 
-This is a demo and does not implement authentication. Do not paste secrets or private tokens into the chat.
+
+
