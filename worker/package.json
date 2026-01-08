@@ -1,0 +1,17 @@
+{
+  "name": "cf_ai_pocket_sre_worker",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --ip 127.0.0.1 --port 8787 --show-interactive-dev-session=false",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250101.0",
+    "typescript": "^5.4.5",
+    "wrangler": "^4.58.0"
+  }
+}
+
+

@@ -1,0 +1,22 @@
+name = "cf-ai-pocket-sre"
+main = "src/index.ts"
+compatibility_date = "2025-07-18"
+
+[vars]
+# Override if needed. Workers AI model IDs can change over time.
+LLM_MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
+DEBUG = "false"
+
+[ai]
+binding = "AI"
+remote = true
+
+[[durable_objects.bindings]]
+name = "SESSION_DO"
+class_name = "SessionDO"
+
+[[migrations]]
+tag = "v1"
+new_classes = ["SessionDO"]
+
+

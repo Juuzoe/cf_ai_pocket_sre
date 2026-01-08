@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pocket SRE</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="header">
+        <div class="title">
+          <div class="brand">Pocket SRE</div>
+          <div class="subtitle">AI Incident Helper (remembers your session)</div>
+        </div>
+        <div class="meta">
+          <nav class="nav">
+            <button id="navChat" class="navBtn isActive" type="button">Chat</button>
+            <button id="navAbout" class="navBtn" type="button">About</button>
+          </nav>
+          <div class="pill">
+            Session: <span id="sessionId" class="mono">…</span>
+          </div>
+        </div>
+      </header>
+
+      <main class="main">
+        <section id="chatSection" class="chat">
+          <div id="messages" class="messages" aria-live="polite"></div>
+          <div id="typing" class="typing hidden">Pocket SRE is typing…</div>
+          <form id="composer" class="composer">
+            <input
+              id="input"
+              type="text"
+              placeholder="Describe what’s happening (errors, timeframe, stack)…"
+              autocomplete="off"
+            />
+            <button id="send" type="submit">Send</button>
+          </form>
+          <div class="hint">
+            Tip: include error codes (520/522/502/500), when it started, and what changed recently.
+          </div>
+        </section>
+
+        <section id="aboutSection" class="about hidden" aria-label="About Pocket SRE">
+          <div class="panelTitle">About Pocket SRE</div>
+          <div class="panelBody">
+            <p class="aboutLead">
+              Pocket SRE is a small chat app that helps you triage website incidents and remembers your stack and prior
+              context per session.
+            </p>
+            <div class="aboutGrid">
+              <div class="aboutCard">
+                <div class="aboutH">How it works</div>
+                <ol class="aboutList">
+                  <li>Your browser generates a <span class="mono">sessionId</span> and stores it in localStorage.</li>
+                  <li>Every message is sent to the Worker at <span class="mono">POST /api/chat</span>.</li>
+                  <li>The Worker routes the request to a Durable Object instance for that session.</li>
+                  <li>The Durable Object coordinates a multi-step flow: parse → clarify (max 2) → final runbook.</li>
+                  <li>It stores chat history + a small profile (stack/domain/notes) in persistent storage.</li>
+                  <li>Older chat is summarized to keep token usage small.</li>
+                </ol>
+              </div>
+              <div class="aboutCard">
+                <div class="aboutH">What you get</div>
+                <ul class="aboutList">
+                  <li>A prioritized runbook checklist (3–7 steps)</li>
+                  <li>Three likely root causes with confidence</li>
+                  <li>A short status update you can paste into Slack/email</li>
+                </ul>
+                <div class="aboutH">Privacy note</div>
+                <p class="aboutNote">
+                  Memory is stored per Durable Object session. Clear your browser storage to start fresh.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <aside class="profile">
+          <div class="panelTitle">Remembered profile</div>
+          <div class="panelBody">
+            <div class="row">
+              <div class="label">Domain</div>
+              <div id="profileDomain" class="value mono">—</div>
+            </div>
+            <div class="row">
+              <div class="label">Tech stack</div>
+              <div id="profileStack" class="value">—</div>
+            </div>
+            <div class="row">
+              <div class="label">Notes</div>
+              <div id="profileNotes" class="value">—</div>
+            </div>
+          </div>
+        </aside>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
+
+
